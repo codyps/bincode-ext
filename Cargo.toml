@@ -1,0 +1,11 @@
+[package]
+
+name = "bincode_ext"
+version = "0.0.1"
+authors = ["Cody P Schafer <dev@codyps.com>"]
+
+[dev-dependencies]
+bincode = "*"
+
+[dependencies]
+rustc-serialize = "*"
