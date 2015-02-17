@@ -1,7 +1,7 @@
 language: rust
 env:
   global:
-    - secure: kc3kYVbf1oG/RtdhSt2+hMYlAs+6pMvXnZiu844tWU9T2/xpM89eoAYOvtuvgnLFecYxoeFETSKpgJj1pd85gaA+Kt+dg8hegGlV+bdTfb16Vt85YbVhgtNczvyF7gNyO8nZSeOhjBH6m6tE3ZGoh2r33LOl0NHh8VZCVldBkk0=
+    - secure: d9XdPvxkk3oABKds9K3SHCfVH/mW3Bls6aUScRRYhsYdQOoNYflDsApqjSFxJEHXuHN2RONkiVds1u1g1YQtkFU3iNPo9qA26tFqV400dRraBPbpm2c/TiH6VeAqto1Rv3+R35BGh1Cw9MO/YBbRW0EPvQ/8bk7fpCLUw/YlSqs=
 
 script:
 - cargo build --verbose
@@ -11,5 +11,5 @@ script:
 after_script:
   - ln -s target/doc doc
   - curl -v http://www.rust-ci.org/artifacts/put?t=$RUSTCI_TOKEN > ./upload-docs
-  - cat ./upload-docs
+  - python -c 'print(open("upload-docs").read())'
   - sh ./upload-docs
