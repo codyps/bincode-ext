@@ -19,24 +19,25 @@ use std::ops::Deref;
 pub struct Le<T>(pub T);
 
 macro_rules! define_le {
-    ($int:ty, $read:ident, $emit:ident) => {
+    ($int:ty) => {
         impl Decodable for Le<$int> {
             fn decode<D: Decoder>(d: &mut D) -> Result<Le<$int>, D::Error> {
-                Ok(Le(try!(d.$read()).swap_bytes()))
+                let r: $int = try!(Decodable::decode(d));
+                Ok(Le(r.swap_bytes()))
             }
         }
 
         impl Encodable for Le<$int> {
             fn encode<S: Encoder>(&self, s: &mut S) -> Result<(), S::Error> {
-                s.$emit(self.0.swap_bytes())
+                self.0.swap_bytes().encode(s)
             }
         }
     }
 }
 
-define_le! { u16, read_u16, emit_u16 }
-define_le! { u32, read_u32, emit_u32 }
-define_le! { u64, read_u64, emit_u64 }
+define_le! { u16 }
+define_le! { u32 }
+define_le! { u64 }
 
 impl<T> Deref for Le<T> {
     type Target = T;
