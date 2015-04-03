@@ -2,7 +2,6 @@
 //! Note that this depends upon bincode trying to emit big endian bytes.
 
 use rustc_serialize::{Decodable, Encodable, Decoder, Encoder};
-use std::num::Int;
 use std::ops::Deref;
 
 /// Use to represent a little endian integer.
