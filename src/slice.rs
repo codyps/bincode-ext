@@ -5,7 +5,6 @@ use std::intrinsics;
 
 use std::ops::Deref;
 use std::cmp::PartialEq;
-use std::fmt::{self, Debug};
 
 /// A struct for encoding fixed length arrays
 /// 
@@ -31,6 +30,7 @@ use std::fmt::{self, Debug};
 /// 
 /// This may not work properly with some encoders that require structuring around multiple
 /// elements.
+#[derive(Clone, Debug)]
 pub struct Fixed<T>(pub T);
 
 impl<T> Deref for Fixed<T> {
@@ -43,12 +43,6 @@ impl<T> Deref for Fixed<T> {
 impl<T: PartialEq> PartialEq for Fixed<T> {
     fn eq(&self, other: &Fixed<T>) -> bool {
         self.0.eq(&other.0)
-    }
-}
-
-impl<T: Debug> Debug for Fixed<T> {
-    fn fmt(&self, f: &mut fmt::Formatter) -> Result<(), fmt::Error> {
-        write!(f, "Fixed({:?})", self.0)
     }
 }
 
