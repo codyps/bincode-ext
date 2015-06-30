@@ -1,8 +1,8 @@
 //! Support for encoding fixed length slices
 
 use rustc_serialize::{Decodable, Encodable, Decoder, Encoder};
-use std::intrinsics;
 
+use std::mem;
 use std::ops::Deref;
 use std::cmp::PartialEq;
 
@@ -54,7 +54,7 @@ macro_rules! def_fixed {
                  * - fill the entire slice, and return it
                  * - OR return an error discarding the slice
                  */
-                let mut v : [T; $n] = unsafe { intrinsics::uninit() };
+                let mut v : [T; $n] = unsafe { mem::uninitialized() };
                 for i in 0..$n {
                    v[i] = try!(Decodable::decode(d));
                 }

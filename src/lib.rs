@@ -1,5 +1,3 @@
-#![feature(core_intrinsics)]
-
 extern crate rustc_serialize;
 
 pub mod byte_order;
